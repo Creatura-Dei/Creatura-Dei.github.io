@@ -44,7 +44,7 @@
 			 </div>
 	 </div>
 </div>
- 
+
 
 
 
@@ -308,11 +308,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	 // Обработчики событий
 	 startBtn.addEventListener('click', () => {
-	 startScreen.style.display = 'none';
-	 questionScreen.style.display = 'flex'; // Важно: flex вместо block!
-			 resetQuizState();
-			 showQuestion();
-	 });
+  startScreen.style.display = 'none';
+  questionScreen.style.display = 'flex'; // Важно: flex вместо block!
+  resetQuizState();
+  showQuestion();
+
+  // Скрываем кнопку "Вернуться" и заголовок
+  const lobbyBtn = document.querySelector('.lobby_btn');
+  const header = document.querySelector('.head_block.head3');
+  if (lobbyBtn) lobbyBtn.style.display = 'none';
+  if (header) header.style.display = 'none';
+});
+
 
 	 submitBtn.addEventListener('click', function() {
   checkAnswer();

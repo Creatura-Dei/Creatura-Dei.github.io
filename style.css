@@ -964,17 +964,17 @@ z-index: -2;
 }
 
 .head_block {
-	padding: 12px 30px 90px 30px;
-	font-size: 1.3em;
-	font-weight: 600;
-	color: rgb(238, 238, 238);
-	position: absolute;
-	top: 6.6%;
-	border-radius: 25px;
-	z-index: 3;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4),
-	inset 0 1px 1px rgba(255, 255, 255, 0.2);
-	cursor: default;
+  padding: 12px 30px 90px 30px;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: rgb(238, 238, 238);
+  position: absolute;
+  top: clamp(8px, 6.6vh, 20px); /* Гибко! */
+  border-radius: 25px;
+  z-index: 3;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  cursor: default;
 }
 
 .btn-text {
@@ -982,11 +982,6 @@ z-index: -2;
   transform: translateZ(0); /* Включаем аппаратное ускорение */
   transition: none !important; /* Отключаем все анимации у текста */
 }
-
-
-
-
-
 
 
 @keyframes rotate {
@@ -1438,16 +1433,16 @@ z-index: -2;
 	cursor: default;
 	background-color: #fffdf2;
 	z-index: 1;
-	width: 130px;
+	width: 160px;
 }
 
 .tips.left {
-	left: 7%; /* прижимаем к краю экрана */
+	left: 2%; /* прижимаем к краю экрана */
 	padding: 20px 40px 20px 0;
 }
 
 .tips.right {
-	right: 7%; /* прижимаем к правому краю экрана */
+	right: 2%; /* прижимаем к правому краю экрана */
 	padding: 20px 0 20px 40px;
 }
 
@@ -1724,22 +1719,42 @@ z-index: -2;
 }
 
 .input-group3 {
-	position: absolute;
-	top: 100%;
-	left: 68%;
-	margin-top: 20px;
+  position: fixed;
+  top: -5%;  
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+  flex-wrap: wrap;
 }
 
+
 .answer-input3 {
-	padding: 12px;
-	color: #ffffff;
-	font-family: 'Montserrat Alternates';
-	font-weight: 700;
-	border: 4px solid #6e8df4;
-	background-color: #010027;
-	border-radius: 8px;
-	font-size: 1.3rem;
-	transition: all 0.3s;
+  padding: 12px;
+  color: #ffffff;
+  font-family: 'Montserrat Alternates';
+  font-weight: 700;
+  border: 4px solid #6e8df4;
+  background-color: #010027;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  transition: all 0.3s;
+  max-width: 60vw;
+  min-width: 180px;
+  flex: 1 1 auto;
+}
+
+.submit-btn3 {
+  font-family: 'Montserrat Alternates';
+  font-weight: 700;
+  background: #e29600;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+  white-space: nowrap;
 }
 
 .answer-input3:focus {
@@ -1752,20 +1767,6 @@ z-index: -2;
 	animation: inputShake 0.5s;
 }
 
-.submit-btn3 {
-	font-family: 'Montserrat Alternates';
-	font-weight: 700;
-	background: #e29600;
-	color: white;
-	border: none;
-	padding: 10px 20px;
-	max-width: 40%;
-	border-radius: 15px;
-	cursor: pointer;
-	font-size: 1rem;
-	transition: background 0.3s;
-	align-self: center;
-}
 
 .submit-btn3:hover {
 	background: #ffb92d;
@@ -1775,6 +1776,7 @@ z-index: -2;
   color: #ffffff; /* Серый цвет */
   opacity: 0.3; /* Полная непрозрачность */
 }
+
 
 .num1 {
  font-size: 1em;
@@ -2322,28 +2324,33 @@ z-index: -2;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
 .game-board5 {
-	display: grid;
-	grid-template-columns: repeat(10, 130px);
-	grid-template-rows: repeat(7, 130px);
-	gap: 14px;
-	justify-content: center;
-	align-items: center;
-	overflow: auto;
-	max-height: 90vh;
-	scrollbar-width: none;
-	-ms-overflow-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
+  width: 100%;
+  /* max-width: 1000px;  ❌ убираем или меняем */
+  margin: 0 auto;
+  justify-items: center;
+  align-items: center;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
+
 
 .game-board5::-webkit-scrollbar {
 	display: none;
 }
 
 .tile5 {
-	aspect-ratio: 1 / 1;
 	width: 100%;
+	aspect-ratio: 1 / 1;
 	max-width: 130px;
 	border-radius: 10px;
 	cursor: pointer;
@@ -2351,6 +2358,8 @@ z-index: -2;
 	transform-style: preserve-3d;
 	transition: transform 0.5s;
 }
+
+
 
 .tile5 .front5, .tile5 .back5 {
 	position: absolute;
