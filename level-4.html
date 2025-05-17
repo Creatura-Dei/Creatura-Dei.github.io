@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Уровень 4 - Сэмплец</title>
+  <link href="/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="lvl4_back">
+
+	<div class="overlay" style="background-color: #0e0021"></div>
+
+
+
+  <div id="game-container"></div>
+
+
+  <div class="vinyl-wrapper">
+    <img src="/images/vinyl_back2.png" class="vinyl" />
+  </div>
+
+	<div class="final-image-container" style="display: none;">
+		<img src="images/qr-3.png" alt="Поздравление!" class="final-image fi3">
+	</div>
+
+	<script>
+		const tracks = [
+			{
+				description: "Первая группа, которая объединила наши музыкальные вкусы",
+				src: "/tracks/1.mp3",
+				answer: "Error37"
+			},
+			{
+				description: "Ты включала это каждое утро в сентябре...",
+				src: "/tracks/2",
+				answer: "2"
+			}
+		];
+		
+		let current = 0;
+		let isPlaying = false;
+		let audio = new Audio();
+		audio.preload = "auto";
+		
+		const clickSound = new Audio('/tracks/click2.mp3');
+		clickSound.preload = "auto";
+		
+		const container = document.getElementById("game-container");
+		const vinylWrapper = document.querySelector(".vinyl-wrapper");
+		
+		function renderIntro() {
+			container.innerHTML = `
+
+				<div class="card4-start">
+					<span class="head_block head4">Сэмплец</span>
+					<h2 class="title-4">🎵 Сэмплец: Уровень 4</h2>
+					<p class="op-4">"Прослушаем" твою музыкальную память!</p>
+					<p class="des-4">Проиграй отрывок и ответь на соответствующий вопрос</p>
+					<p class="headphone">🎧</p>
+					<p class="des-4-2">Прибавь громкость</p>
+					<button id="start-btn" class="check-btn start-btn4" style="background-color: #cb4507;">Начать</button>
+					 <button class="lobby_btn lobby_btn-4" onclick="window.location.href='lobby.html'">Вернуться</button>
+				</div>
+			`;
+		
+			const startBtn = document.getElementById("start-btn");
+		
+			// Старт по клику (User Gesture)
+			startBtn.addEventListener("click", async () => {
+				try {
+					// "Прогрев" аудио при первом пользовательском взаимодействии
+					audio.src = tracks[0].src;
+					audio.muted = true;
+					await audio.play(); // будет успешно, т.к. вызвано пользователем
+					audio.pause();
+					audio.currentTime = 0;
+					audio.muted = false;
+				} catch (e) {
+					console.warn("Audio warm-up failed:", e);
+				}
+		
+				fadeTo(() => renderCard(0));
+			});
+		}
+		
+		function renderCard(index) {
+			const track = tracks[index];
+		
+			vinylWrapper.classList.remove("fadeOut", "spinning");
+			vinylWrapper.offsetWidth; // Repaint
+		
+			container.innerHTML = `
+									<input type="text" id="answer-input" class="input4" placeholder="Твой ответ...">
+				<div class="card4">
+					<div class="description">${track.description}</div>
+					<button id="play-btn" class="play-btn">▶</button>
+					<div class="controls">
+
+						<button id="check-btn" class="check-btn">Проверить</button>
+					</div>
+				</div>
+			`;
+		
+			// Настройка аудио
+			audio.src = track.src;
+			audio.load();
+			audio.pause();
+			audio.currentTime = 0;
+			isPlaying = false;
+		
+			const playBtn = document.getElementById("play-btn");
+			const checkBtn = document.getElementById("check-btn");
+			const input = document.getElementById("answer-input");
+		
+			playBtn.addEventListener("click", () => {
+				clickSound.currentTime = 0;
+				clickSound.play();
+				const input = document.querySelector(".input4");
+				input?.classList.add("arm-out");
+		
+				if (!isPlaying) {
+					// UI эффект до старта звука
+					playBtn.textContent = "⏹";
+					playBtn.classList.add("playing");
+					vinylWrapper.classList.add("visible");
+					document.body.classList.add("playing-bg");
+		
+					setTimeout(() => {
+						audio.play().catch(err => console.warn("Audio play failed:", err));
+					}, 50);
+		
+					isPlaying = true;
+				} else {
+					stopPlayback();
+				}
+			});
+		
+			checkBtn.addEventListener("click", () => {
+				const userAnswer = input.value.trim().toLowerCase();
+				const correct = track.answer.toLowerCase();
+		
+				if (userAnswer === correct) {
+					stopPlayback();
+					vinylWrapper.classList.remove("visible");
+					vinylWrapper.classList.add("fadeOut");
+					
+		
+					setTimeout(() => {
+						if (current + 1 < tracks.length) {
+							current++;
+							fadeTo(() => renderCard(current));
+						} else {
+							fadeTo(() => {
+								container.innerHTML = `
+									<div class="final-screen">
+										<h2 class="final-message">Уровень пройден! Молодец!</h2>
+										<div class="final-image-container" style="display: flex; justify-content: center; margin-top: 30px;">
+											<img src="images/qr-4.png" alt="Поздравление!" class="final-image fi4">
+										</div>
+									</div>
+								`;
+
+								// Создаем кнопку
+								const btn = document.createElement('button');
+								btn.textContent = '← Назад в лобби';
+								btn.className = 'floating-back-button';
+								document.body.appendChild(btn);
+
+								// Показываем с анимацией
+								setTimeout(() => {
+									btn.classList.add('show');
+								}, 100);
+
+								// Назад в лобби
+								btn.addEventListener('click', () => {
+									localStorage.setItem('level4Completed', 'true');
+									window.location.href = 'lobby.html';
+								});
+							});
+
+
+						}
+					}, 700);
+				} else {
+					input.classList.remove("error");
+					void input.offsetWidth;
+					input.classList.add("error");
+					input.value = "";
+					setTimeout(() => input.classList.remove("error"), 500);
+				}
+			});
+		}
+		
+		function stopPlayback() {
+			const playBtn = document.querySelector(".play-btn");
+			if (playBtn) {
+				playBtn.textContent = "▶";
+				playBtn.classList.remove("playing");
+			}
+
+			vinylWrapper.classList.remove("visible");
+			document.body.classList.remove("playing-bg");
+
+			const input = document.querySelector(".input4");
+			input?.classList.remove("arm-out");
+
+			audio.pause();
+			audio.currentTime = 0;
+			isPlaying = false;
+		}
+
+		
+		function fadeTo(callback) {
+			container.classList.add("fade-out");
+			setTimeout(() => {
+				callback();
+				container.classList.remove("fade-out");
+				container.classList.add("fade-in");
+				setTimeout(() => container.classList.remove("fade-in"), 500);
+			}, 300);
+		}
+		
+		
+		renderIntro();
+		
+			// Добавляем обработчик события на кнопку "Назад"
+	document.getElementById('back-button').addEventListener('click', function() {
+	// Помечаем уровень 1 как пройденный
+	localStorage.setItem('level4Completed', 'true');
+
+	// Потом идём в лобби
+	window.location.href = 'lobby.html'; // или куда у тебя настроено
+	});
+		</script>
+		
+	
+	
+</body>
+</html>

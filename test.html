@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Уровень 5</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="lvl5_back">
+  <div class="overlay" style="background-color: #003528"></div>
+
+  <span class="head_block head5">Парочки</span>
+
+  <div class="lvl_block" style="border: none; border-radius: 30px; outline: double 10px #3f7d58; outline-offset: -15px; background-color: #fffdf2;">
+    <p class="zagolovok" style="font-size: 4em;">Найди все пары</p>
+    <p class="text">Запомни расположение и найди одинаковые карточки</p>
+    <button class="start-btn" onclick="startGame()">Начать</button>
+  </div>
+
+  <div class="memory-game-wrapper" id="gameContainer">
+    <div id="game"></div>
+    <button class="start-btn" style="margin-top: 20px;" onclick="init()">Перезапустить</button>
+  </div>
+
+  <div class="area">
+    <ul class="circles">
+      <li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li>
+    </ul>
+  </div

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Уровень 2</title>
+  <link href="/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+	<body class="lvl2_back">
+		<div class="ocean">
+			<div class="wave"></div>
+			<div class="wave"></div>
+		</div>
+		<div class="overlay" style="background-color: #2f1500"></div>
+
+	<span class="head_block head2">Дежавюшки</span>
+
+
+	<div class="shadow"></div>
+
+	<div class="card-wrapper">
+		<div class="cards back-card">
+			<div class="card-text">
+				<p></p>
+			</div>
+		</div>
+		<div class="cards active-card">
+			<div class="card-text">
+				<p></p>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+
+		<div class="tips left">
+			<svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M14 17L9 12L14 7" stroke="#ff6a00" stroke-width="2" stroke-linecap="round"/>
+				<path d="M10 17L5 12L10 7" stroke="#ff6a00" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+			</svg>
+			<span>Неверно</span>
+		</div>
+		<div class="tips right">
+			<svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M10 17L15 12L10 7" stroke="#ff6a00" stroke-width="2" stroke-linecap="round"/>
+				<path d="M14 17L19 12L14 7" stroke="#ff6a00" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+			</svg>
+			<span>Верно</span>
+		</div>
+
+
+
+		<div id="end-screen">
+			<p class="end2-text">Уровень пройден! Молодец!</p>
+			<div class="final-image2-container">
+				<img src="images/qr-2.png" alt="Поздравление!" class="final-image2">
+			</div>
+			<button class="back-button-2" onclick="window.location.href='lobby.html'" id="back-button">
+				← Назад в лобби
+			</button>
+		</div>
+
+	
+	<button class="lobby_btn lobby_btn-2" onclick="window.location.href='lobby.html'">
+ 		<span class="btn-text">Вернуться</span>
+	</button>
+
+
+	<script>
+		const questions = [
+	{
+		text: `<h2 class="title-2">Дежавюшки: Уровень 2</h2>
+					 <p class='op-2'>Погружаемся в мир воспоминаний</p>
+					 <br>
+					 <p class='des-2'>В этом уровне тебе нужно выбирать правильные суждения, отправляя карточку влево или вправо. <br> Используй для этого клавиши:</p><img src="/images/keyboard.png" class="img-2">`,
+		isIntro: true
+	},
+	{
+		text: "<p class='que-2'>Правда, что Илюша очень сильно любит Олечку? 😍</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Оля самая милая и прекрасная? 🔥</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Олик сходит с ума по молоку! 🍼</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Лирили Ларила сильнее Тун Тун Тун Тун Тун Тун Тун Тун Тун Тун Тун Сахура! <br>🐘🤜👺</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Мы впервые встретились  <br>в школьной столовой 🎓🍏</p>",
+		correct: 'left'
+	},	
+	{
+		text: "<p class='que-2'>Первый поцелуй был у бабушкиного подъезда 👩‍❤️‍💋‍👨</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Если бы не ты, я бы и не начал коллекционировать фигурки и винил 🎺💿</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Поездка на Оку была уютной (да, мы не мылись как чингачкуки) 🏕️🤝🏿</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Полюбили бы мы друг друга, будь кто-то из нас улиткой или гусеницей? <br>🐌🐛</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Если бы не познакомились, ты бы по сей день ходила с проводными наушниками 🎧</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Фраза 'бричканутая лялечка' принадлежит Вите 🏎️</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Оля лунатит, а Илюша её ловит и успокаивает <br>🥴💤</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Мы очень любим Мирку? 👧🧡</p>",
+		correct: 'right'
+	},	
+	{
+		text: "<p class='que-2'>Лучшие сухарики - Фишка 🍞</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Поездка в Питер была унылой (мы даже не видели фриков в бургер кинге и не смотрели спайдер мэна после ночных куралесов!) <br>🍔🛥️</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>У нас самые лучшие семьи (а иначе зачем мы туда так часто катаемся?) 🧬</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>На концерте стигматы мы стояли в стороне и медленно потягивали пивко 🍻</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Я не люблю всех кошек мира  <br>(по заявлению кое-кого)😾❌</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Сабвэй сёрф лучше май литл пони (не королевство) 🏃>🐴</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Мы ещё построим большой и уютный дом в Майнкрафт?  <br>🔨🏠</p>",
+		correct: 'right'
+	},	
+	{
+		text: "<p class='que-2'>Оля ВСЕГДА рассасывает чупа-чупс до конца (и вовсе не грызёт его) 🍭</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>День Космонавтиков отмечается  <br>12 апреля 👽👨‍🚀👩‍🚀</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>У наших отцов есть пара козырных фирменных блюд в рукаве 😋🐟🦆</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Зубам следует давать пару выходных, а лучше вообще отпуск!  <br>🦷</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Наши отношения были интересными,  <br>запоминающимися и уникальными <br><span style='font-size: 3em; color: orange;'>８</span>🏆</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Мы не учимся решать проблемы и всегда встаём на одни и те же грабли 💣</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Оля наносит глину на лицо, чтобы казаться смешным каменным големом 🌚</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Илья ничего никогда не забывает 🤔</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>У нас самый лучший музыкальный вкус (прям ну не как у всех!) 🎵</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>У Оли самые лучшие соседи по общаге! (помимо тараканчиков) <br>😮🦂</p>",
+		correct: 'left'
+	},
+	{
+		text: "<p class='que-2'>Ольке всегда к лицу одежда Илюшанчика 👙</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Идеальный вечер - это МЫ, семечки (сухарики - опционально) и сериал под пледиком 📺🤎</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Впереди нас ждут захватывающие приключения и новые открытия <br>✈️🧳⛱️</p>",
+		correct: 'right'
+	},
+	{
+		text: "<p class='que-2'>Мы будем хорошими супругами, и из нас получится отличная семья <br><span style='font-size: 3em; color: orange;'>💌</span></p>",
+		correct: 'right'
+	},	
+	{
+		text: "",
+		isEnd1: true
+	}
+];
+
+let currentIndex = 0;
+
+const cards = document.querySelectorAll('.card');
+let activeCard = document.querySelector('.active-card');
+let backCard = document.querySelector('.back-card');
+const endScreen = document.getElementById('end-screen');
+
+function setCardText(card, index) {
+	const cardText = card.querySelector('.card-text');
+	if (questions[index]) {
+		cardText.innerHTML = questions[index].text;
+	} else {
+		cardText.innerHTML = '';
+	}
+}
+
+setCardText(activeCard, currentIndex);
+setCardText(backCard, currentIndex + 1);
+
+function resetCardStyles() {
+	activeCard.style.transition = '';
+	activeCard.style.transform = '';
+	activeCard.style.backgroundColor = '';
+	activeCard.style.opacity = '1';
+}
+
+let isCooldown = false;
+
+function swipeCard(direction) {
+	if (isCooldown) return;
+	isCooldown = true;
+
+	if (currentIndex >= questions.length) {
+		isCooldown = false;
+		return;
+	}
+
+	if (questions[currentIndex].isIntro) {
+		resetCardStyles();
+		activeCard.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+
+		if (direction === 'right') {
+			activeCard.style.transform = 'translate(150%, -30%) rotate(15deg)';
+		} else {
+			activeCard.style.transform = 'translate(-150%, -30%) rotate(-15deg)';
+		}
+		activeCard.style.opacity = '0';
+
+		setTimeout(() => {
+			resetCardStyles();
+			activeCard.classList.remove('active-card');
+			activeCard.classList.add('back-card');
+
+			backCard.classList.remove('back-card');
+			backCard.classList.add('active-card');
+
+			[activeCard, backCard] = [backCard, activeCard];
+
+			currentIndex++;
+			if (questions[currentIndex]?.isEnd1) {
+				showEndScreen();
+			} else {
+				setCardText(backCard, currentIndex + 1);
+			}
+
+			isCooldown = false;
+		}, 700);
+
+		return;
+	}
+
+	const correctDirection = questions[currentIndex].correct;
+	resetCardStyles();
+
+	if (direction === correctDirection) {
+		setTimeout(() => {
+			activeCard.style.transition = 'background-color 0.3s ease';
+			activeCard.style.backgroundColor = 'lightgreen';
+
+			setTimeout(() => {
+				activeCard.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+				if (direction === 'right') {
+					activeCard.style.transform = 'translate(150%, -30%) rotate(15deg)';
+				} else {
+					activeCard.style.transform = 'translate(-150%, -30%) rotate(-15deg)';
+				}
+				activeCard.style.opacity = '0';
+			}, 300);
+		}, 500);
+
+		setTimeout(() => {
+			resetCardStyles();
+
+			activeCard.classList.remove('active-card');
+			activeCard.classList.add('back-card');
+
+			backCard.classList.remove('back-card');
+			backCard.classList.add('active-card');
+
+			[activeCard, backCard] = [backCard, activeCard];
+
+			currentIndex++;
+			if (questions[currentIndex]?.isEnd1) {
+				showEndScreen();
+			} else {
+				setCardText(backCard, currentIndex + 1);
+			}
+
+			isCooldown = false;
+		}, 1100);
+	} else {
+		activeCard.style.transition = 'background-color 0.3s ease, transform 0.3s ease';
+		activeCard.style.backgroundColor = '#ff6464';
+
+		let shakeCount = 0;
+		const shakeInterval = setInterval(() => {
+			if (shakeCount < 5) {
+				activeCard.style.transform = shakeCount % 2 === 0 ? 'translateX(-10px)' : 'translateX(10px)';
+				shakeCount++;
+			} else {
+				clearInterval(shakeInterval);
+				activeCard.style.transform = 'translateX(0)';
+			}
+		}, 100);
+
+		setTimeout(() => {
+			activeCard.style.backgroundColor = '';
+			isCooldown = false;
+		}, 700);
+	}
+}
+
+function showEndScreen() {
+    // Показываем финальный экран
+		endScreen.classList.add('show');
+
+		setTimeout(() => {
+			document.querySelector('.back-button-2')?.classList.add('show');
+			document.querySelector('.final-image-container')?.classList.add('show');
+		}, 1000);
+
+
+    const backButton = document.getElementById('back-button');
+    backButton.style.opacity = 1;  // Кнопка становится видимой
+    backButton.style.visibility = 'visible';  // Она доступна для взаимодействия
+    backButton.style.pointerEvents = 'auto';  // Кнопка кликабельна
+}
+
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'ArrowRight') swipeCard('right');
+	if (e.key === 'ArrowLeft') swipeCard('left');
+});
+
+
+document.getElementById('back-button').addEventListener('click', function() {
+  // Помечаем уровень 1 как пройденный
+  localStorage.setItem('level2Completed', 'true');
+
+  // Потом идём в лобби
+  window.location.href = 'lobby.html'; // или куда у тебя настроено
+});
+
+
+
+
+// Добавляем обработчик события на кнопку "Назад"
+document.getElementById('back-button').addEventListener('click', function() {
+  // Помечаем уровень 1 как пройденный
+  localStorage.setItem('level2Completed', 'true');
+
+  // Потом идём в лобби
+  window.location.href = 'lobby.html'; // или куда у тебя настроено
+});
+	</script>
+</body>
+</html>

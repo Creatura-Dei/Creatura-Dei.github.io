@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Выбор уровня</title>
+  <link href="/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="lobby-page">
+
+	<div class="overlay"></div>
+
+	<h1 class="lobby-title">Выбери уровень</h1>
+    <div class="levels-grid">
+
+			
+      <!-- Уровень 1 -->
+			<div class="level-card" style="background: #ae2012" data-level="1" href="/1_level.html">
+				<div class="level-preview" style="background-image: url(/images/фото/_1.png);"></div>
+				<h3>Мемопедия</h3>
+				<div class="level-badge" style="background: #ae2012">
+					<img class="icon" src="/images/smile.svg">
+				</div>
+			</div>
+			
+      <!-- Уровень 2 -->
+			<div class="level-card" style="background: #ffb703" data-level="2">
+				<div class="level-preview" style="background-image: url(/images/фото/_2.png);"></div>
+				<h3>Дежавюшки</h3>
+				<div class="level-badge"  style="background: #ffb703">
+					<img class="icon" src="/images/eye.svg">
+				</div>
+			</div>
+
+      
+      <!-- Уровень 3 -->	
+      <div class="level-card" style="background: #315692" data-level="3">
+				<div class="level-preview" style="background-image: url(/images/фото/_3.png);"></div>
+        <h3>Математрица</h3>
+        <div class="level-badge" style="background: #f68f00">
+					<img class="icon" src="/images/brain.svg">
+				</div>
+      </div>
+
+      <!-- Уровень 4 -->	
+			<div class="level-card" style="background: #a463c5" data-level="4">
+				<div class="level-preview" style="background-image: url(/images/фото/_4.png);"></div>
+				<h3>Сэмплец</h3>
+				<div class="level-badge" style="background: #9784ad">
+					<img class="icon" src="/images/vinyl.svg">
+				</div>
+			</div>
+      
+      <!-- Уровень 5 -->
+      <div class="level-card" style="background: #34a65c" data-level="5">
+				<div class="level-preview" style="background-image: url(/images/фото/ВТОРОЕ.png);"></div>
+				<h3>Парочки</h3>
+        <div class="level-badge" style="background: #34a65c">
+					<img class="icon" src="/images/game3.svg" style="min-width: 122%;">
+				</div>
+      </div>
+
+      <!-- Уровень 6 -->
+			<div class="level-card locked" style="background: #323232" data-level="6">
+				<div class="level-preview">
+					<img src="/images/incognito2.png" style="position: absolute; top: 10%; left: 25%; width: 50%">
+				</div>
+				<h3>Секретновое</h3>
+				<div class="level-badge" style="background: #323232">
+					<img class="icon" src="/images/search2.svg" style="width: 110%;">
+				</div>
+			</div>
+		</div>
+
+		<!-- Уровень 7 -->
+		<div class="level-card final hidden" data-level="final">
+			<h3>Финал</h3>
+		</div>
+
+    <button class="back-btn">
+      Назад
+    </button>
+	<script>
+
+document.querySelector('.back-btn').addEventListener('click', function() {
+  // Сохраняем текущую позицию прокрутки
+  localStorage.setItem('scrollPosition', window.scrollY);
+  window.location.href = 'index.html';
+});
+
+		// Обработка выбора уровня
+		document.querySelectorAll('.level-card:not(.locked)').forEach(card => {
+			card.addEventListener('click', () => {
+				const level = card.dataset.level;
+				window.location.href = `level-${level}.html`;
+			});
+		});
+		
+		// Кнопка назад
+		document.querySelector('.back-btn').addEventListener('click', () => {
+			window.location.href = 'index.html';
+		});
+
+
+
+
+
+		document.addEventListener('DOMContentLoaded', function() {
+  const container = document.createElement('div');
+  container.className = 'stars-container';
+  document.body.prepend(container);
+  
+  // Создаём 150 звёзд
+  for (let i = 0; i < 250; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    
+    // Случайные параметры
+    const size = Math.random() * 7;
+    const opacity = 0.2 + Math.random() * 0.8;
+    const duration = 3 + Math.random() * 7;
+    const delay = Math.random() * 0.1;
+    const driftX = (Math.random() - 0.5) * 50;
+    const driftY = (Math.random() - 0.5) * 20;
+    
+    // Позиционирование
+    star.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      --opacity: ${opacity};
+      --duration: ${duration}s;
+      --drift-x: ${driftX}px;
+      --drift-y: ${driftY}px;
+      animation-delay: ${delay}s;
+    `;
+    
+    // Добавляем вторую анимацию для движения
+    star.style.animation += `, drift ${duration * 3}s infinite alternate`;
+    
+    container.appendChild(star);
+  }
+});
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Для каждого уровня (1-5)
+  for (let i = 1; i <= 5; i++) {
+    const levelCard = document.querySelector(`.level-card[data-level="${i}"]`);
+    
+    // Проверяем, завершён ли уровень
+    if (localStorage.getItem(`level${i}Completed`) === 'true') {
+      if (levelCard) {
+        levelCard.classList.add('completed'); // Добавляем класс completed
+
+        // Добавляем обработчик клика для завершённого уровня
+        levelCard.addEventListener('click', function(event) {
+          event.preventDefault(); // Останавливаем стандартное действие (переход на уровень)
+          showMessage('Уровень уже пройден!'); // Показываем сообщение
+        });
+      }
+    }
+  }
+
+  // Для остальных уровней, если они не завершены
+  document.querySelectorAll('.level-card:not(.locked):not(.completed)').forEach(card => {
+    card.addEventListener('click', () => {
+      const level = card.dataset.level;
+      window.location.href = `level-${level}.html`; // Переходим на уровень
+    });
+  });
+});
+
+
+
+
+// открытие финала
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Проверка: все ли 5 уровней завершены
+  let allCompleted = true;
+  for (let i = 1; i <= 5; i++) {
+    if (localStorage.getItem(`level${i}Completed`) !== 'true') {
+      allCompleted = false;
+      break;
+    }
+  }
+
+  if (allCompleted) {
+    const finalCard = document.querySelector('.level-card.final');
+    if (finalCard) {
+      finalCard.classList.remove('hidden'); // Показываем финал
+      finalCard.addEventListener('click', () => {
+        window.location.href = 'final.html'; // Заменить на нужный путь
+      });
+    }
+  }
+});
+
+// localStorage.removeItem('level1Completed');
+	</script>
+</body>
+</html>

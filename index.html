@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Любимой Оле❤️</title>
+	<link href="/style.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="height: 300vh">
+	<div class="overlay-main"></div>
+	<section class="screen-1">
+		<div class="blob blob-1"></div>
+		<div class="blob blob-2"></div>
+		<div class="blob blob-3"></div>
+		<h1>Love quest</h1>
+		<p style="position: absolute; top: 90%; color: #4e1717">Прокрути вниз, чтобы начать!</p>
+  </section>
+
+
+  <section class="screen-2">
+		<div class="glass-block">
+			<p class="zagolovok" style="font-size: 5em;">Привет, Оля!</p>
+			<p class="text">Это небольшой квест, в конце которого тебя ждёт подарочек!</p>
+		</div>
+  </section>
+	
+
+<section class="heart-animation" id="anim_heart">
+		<div class="glass-block rules" style="margin-bottom: 0; top: 30px">
+			<p class="zagolovok" style="font-size: 3em; margin-top: 20px;">Правила квеста</p>
+				<ol>
+					<li>Cтарайся полагаться только на свою память и смекалку!</li>
+					<li>Ладно, кроме парочки моментов (¬‿¬ )</li>
+					<li>Не торопись, времени на прохождение достаточно</li>
+					<li>В случае затруднения - пиши в специальный канал Telegram, который скоро тебе откроется</li>
+					<li>Финал квеста обязателен к прохождению вдвоём ♥️</li>
+				</ol>
+				<p class="zagolovok" style="font-size: 1em; margin-top: 20px;">Наслаждайся прохождением! Удачи!</p>
+		</div>
+		<button class="heart-btn">
+			<span class="heart-text">▶</span>
+			<div class="heart-shape"></div>
+		</button>
+</section>
+
+	<script>
+		// анимация сердец
+		var x = 1;
+		var bgImage = document.getElementById('anim_heart');
+		function move(){
+			x--;
+			bgImage.style.backgroundPositionY = x + "px";
+		}
+		setInterval(move, 30);
+
+
+		function handleNavigation() {
+  if (performance.navigation.type === 2) { // Если вернулись через "назад"
+    const scrollPos = sessionStorage.getItem('scrollPos');
+    if (scrollPos) {
+      window.scrollTo(0, parseInt(scrollPos));
+    }
+  }
+}
+
+// При клике на кнопку-сердце (.heart-btn)
+document.querySelector('.heart-btn').addEventListener('click', () => {
+    // Сохраняем текущую позицию скролла
+    sessionStorage.setItem('startScroll', window.scrollY);
+    // Переход на лобби
+    window.location.href = 'lobby.html';
+  });
+
+  // При загрузке страницы
+  window.addEventListener('DOMContentLoaded', () => {
+    // Восстанавливаем скролл если есть сохранённая позиция
+    const savedPos = sessionStorage.getItem('startScroll');
+    if (savedPos) {
+      window.scrollTo(0, parseInt(savedPos));
+      sessionStorage.removeItem('startScroll');
+    }
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html style="  backface-visibility: hidden;
+  transform: translateZ(0);">
+<head>
+  <title>Уровень 3</title>
+  <link href="/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="lvl3_back" style="backface-visibility: hidden;
+  transform: translateZ(0);">
+
+<div class="overlay" style="background-color: #001228"></div>
+
+
+	
+	<div class="lvl3_background"></div>
+
+
+
+ <span class="head_block head3">Математрица</span>
+ <div class="lvl_block card" style="border: none; border-radius: 30px;
+	outline: dashed 7px #00208a; outline-offset: -15px; background-color: #f2f6ff">
+	 
+
+			 <!-- Стартовый экран (добавляем в начало) -->
+			 <div class="start-screen3">
+				 <h2 class="title-3">Математрица: Уровень 3</h2>
+				 <p class="op-3">Пораскинем-ка мозгами! 😈</p>
+				 <button class="start-btn3">Ну, поехали!</button>
+		 </div>
+ 
+
+		 <div class="question-screen3" style="display:none;">
+			 <div class="card-content3">
+					 <h2 class="question3 animate"></h2>
+					 <div class="input-group input-group3  animate">
+							 <input type="text" class="answer-input3" placeholder="Твой ответ...">
+							 <button class="submit-btn3">Проверить</button>
+					 </div>
+					 <div class="final-image-container" style="display: none;">
+						 <img src="images/qr-3.png" alt="Поздравление!" class="final-image fi3">
+					 </div>
+			 </div>
+	 </div>
+</div>
+ 
+
+
+
+
+
+ <button class="lobby_btn lobby_btn-3" onclick="window.location.href='lobby.html'">
+	 Вернуться
+ </button>
+
+
+ <button class="back-button back-button-3" onclick="window.location.href='lobby.html'" id="back-button">
+		← Назад в лобби
+ </button>
+
+ <script>
+
+// Добавляем после получения элементов DOM
+document.addEventListener('DOMContentLoaded', function() {
+	 // Элементы DOM
+	 const startScreen = document.querySelector('.start-screen3');
+	 const questionScreen = document.querySelector('.question-screen3');
+	 const startBtn = document.querySelector('.start-btn3');
+	 const card = document.querySelector('.card');
+	 const questionElement = document.querySelector('.question3');
+	 const answerInput = document.querySelector('.answer-input3');
+	 const submitBtn = document.querySelector('.submit-btn3');
+	 const inputGroup = document.querySelector('.input-group3');
+	 const overlay = document.querySelector('.overlay');
+	 const backButton = document.querySelector('.back-button');
+
+
+	 const questions = [
+			 {
+					 text: "<h2>Уровень №1: Мосик и пять мисок</h2><p>На кухне выстроились в ряд пять кошачьих мисок с Вискасом. <br>Каждая пронумерована слева направо — от <span class='highlight'>1</span> до <span class='highlight'>5</span>. <br>В каждой миске лежит разное количество корма:<span class='highlight'> 20 г</span>, <span class='highlight'>30 г</span>, <span class='highlight'>40 г</span>, <span class='highlight'>50 г</span> и <span class='highlight'>60 г</span> <br>(но неизвестно, где сколько).</p> <p>Сигмовый кот Мосик, известный гурман, сегодня выбрал одну из мисок. <br>Чтобы понять, из какой именно - нужно внимательно присмотреться к следующим фактам:</p> </div> <div class='conditions'> <ol> <li>Мосик ест только из миски, стоящей <span class='highlight'>левее самой полной</span>.</li> <li><span class='highlight'>Самая скудная миска</span> — не крайняя.</li> <li>В миске <span class='highlight'>№3</span> лежит количество корма, равное <span class='highlight'>среднему значению</span> от количества всех пяти мисок.</li> <li>В миске, из которой ел Мосик, лежит <span class='highlight'>на 10 грамм меньше</span>, чем в самой полной.</li> </ol> </div> <p class='question33'>Вопрос: Из какой миски (номер) ел Мосик?</p>",
+					 answer: "1",
+			 },
+			 {
+					 text: "<h2 style='margin: 20px 0 60px 0;'>Уровень №2: Витрина Оли</h2> <p>Оля расставила на полках серванта своих любимиц:</p> <ul> <li><span class='highlight'>Monster High</span></li> <li><span class='highlight'>Winx</span></li> <li><span class='highlight'>Black★Rock Shooter</span></li> </ul> <p>Всего в серванте — <span class='highlight'>110 предметов</span>. Известно, что:</p> <div class='conditions'> <ol> <li>Кукол <span class='highlight'>Winx</span> на <span class='highlight'>20% меньше</span>, чем кукол <span class='highlight'>Monster High</span>.</li> <li>Фигурок <span class='highlight'>Black★Rock Shooter</span> в <span class='highlight'>2 раза меньше</span>, чем кукол <span class='highlight'>Winx</span>.</li> </ol> </div> <p class='question33' style='margin-top: 70px;'> Вопрос: Сколько фигурок <span class='highlight'>Black★Rock Shooter</span> на витрине? </p>",
+					 answer: "20",
+			 },
+			 {
+					 text: "<h2>Уровень №3: А как скачать интернет?</h2> <p><span class='highlight'>Оля</span> — дизайнер, а с недавнего времени и преподаватель. <br> С самого утра она сидела и проверяла сообщения от студентов. <span class='highlight'>Международный день тупых вопросов</span>. Что поделать?</p> <div class='conditions' style='margin: 0; padding: 0 auto'> <ol> <li>Каждый студент присылает по <span class='highlight'>4 вопроса</span> в день.</li> <li>На каждый вопрос у Оли уходит ровно <span class='highlight'>2 минуты</span> ответа.</li> <li>Всего студентов — <span class='highlight'>10</span>.</li> <li>Рабочий день длится <span class='highlight'>8 часов</span>.</li> </ol> </div><p>Однако один студент с довольно габаритными губками задал вопросы про <span class='highlight'>Photoshop</span> и <span class='highlight'>фильтры со слоями</span> — и завис у Оли в переписке на целых <span class='highlight'>40 минут</span>! А другой студент весь день не выходил на связь — его засосало в <span class='highlight'>фурри-вселенную</span>. Он успел прислать лишь <span class='highlight'>1 вопрос</span> в самом конце дня, и Оля, конечно, ответила! Такая уж она ответственная...</p> <p class='question33'>Вопрос: Сколько свободного времени у Оли осталось на другие дела,<br> если весь остальной день она отвечала только на вопросы студентов?</p>",
+					 answer: "366",
+			 },
+			 {
+				text: "<h2 style='margin: 20px 0 60px 0;'>Финальный уровень</h2> <p>Ну что, Оля, вот ты и дошла до конца! Осталось только узнать:</p> <div class='conditions'> <ol> <li>Сколько мы говорили друг другу <span class='highlight'>приятных слов</span>?</li> <li>Сколько было <span class='highlight'>уютных объятий</span>?</li> <li>Сколько <span class='highlight'>прощаний и свиданий</span>?</li> <li>Сколько <span class='highlight'>жарких ночей</span>?</li> <li>Сколько <span class='highlight'>шуток</span>, как и ты, вызывающих искреннюю улыбку?</li> <li>Сколько было <span class='highlight'>извинений и прощений</span>?</li> <li>И сколько ЕЩЁ <span class='highlight'>БУДЕТ ЛЮБВИ</span>?</li> </ol> </div> <p class='question33' style='margin-top: 50px;'> <strong>Подсказка:</strong> Ответ — <span class='highlight'>число</span>, название очень популярного браузера.</p>",
+				answer: [
+					'10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000',
+					'10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+				],
+			 },
+			 {
+					 text: "Уровень пройден! Молодец!",
+					 isEnd3: true
+			 }
+	 ];
+
+	 let currentQuestionIndex = 0;
+
+	 // Инициализация квиза
+	 function initQuiz() {
+			 // Скрываем вопросный экран при загрузке
+			 questionScreen.style.display = 'none';
+			 startScreen.style.display = 'flex';
+			 
+			 // Сбрасываем состояние
+			 resetQuizState();
+	 }
+
+	 function normalizeAnswer(ans) {
+  return ans.replace(/\s+/g, ''); // убираем все пробелы
+}
+
+	 // Сброс состояния квиза
+	 function resetQuizState() {
+			 currentQuestionIndex = 0;
+			 answerInput.classList.remove('error');
+			 questionElement.classList.remove('animate');
+			 inputGroup.classList.remove('animate');
+			 card.classList.remove('correct-flash', 'end3');
+			 card.style.transition = '';
+			 inputGroup.style.display = 'flex';
+			 answerInput.value = '';
+			 overlay.style.opacity = '0';
+			 backButton.style.opacity = '0';
+			 backButton.style.transform = 'translateY(20px)';
+	 }
+
+	 // Показ текущего вопроса
+	 function showQuestion() {
+    const question = questions[currentQuestionIndex];
+    const finalImageContainer = document.querySelector('.final-image-container');
+
+    // Сброс состояния
+    answerInput.value = '';
+    answerInput.classList.remove('error');
+    questionElement.classList.remove('animate');
+    inputGroup.classList.remove('animate');
+    card.style.transition = '';
+    finalImageContainer.style.display = 'none';
+
+    questionElement.innerHTML = question.text;
+
+    if (question.isEnd3) {
+        // Скрываем карточку и плавно показываем финальный экран
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        card.style.display = 'none';
+
+        overlay.style.transition = 'opacity 0.8s ease';
+        overlay.style.opacity = '1';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        overlay.style.zIndex = '998';
+
+        card.classList.add('end3');
+        inputGroup.style.display = 'none';
+        finalImageContainer.style.display = 'block';
+        finalImageContainer.style.opacity = '0';
+
+        setTimeout(() => {
+            card.style.display = 'flex';
+            card.style.alignItems = 'center';
+            card.style.justifyContent = 'center';
+
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+
+                setTimeout(() => {
+                    finalImageContainer.style.transition = 'opacity 0.5s ease 0.2s';
+                    finalImageContainer.style.opacity = '1';
+
+                    setTimeout(() => {
+                        backButton.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+												backButton.style.pointerEvents = 'auto'; 
+                        backButton.style.opacity = '1';
+                        backButton.style.transform = 'translateY(0)';
+                    }, 300);
+                }, 200);
+            }, 50);
+        }, 100);
+    } else {
+        // Обычный вопрос
+        overlay.style.opacity = '0';
+        card.classList.remove('end3');
+        card.style.display = 'block';
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+        inputGroup.style.display = 'flex';
+        finalImageContainer.style.display = 'none';
+        answerInput.focus();
+				backButton.style.opacity = '0';
+				backButton.style.transform = 'translateY(20px)';
+				backButton.style.pointerEvents = 'none'; // 🔒 отключаем клики
+
+        questionElement.classList.add('animate');
+        inputGroup.classList.add('animate');
+        setTimeout(() => {
+            questionElement.classList.remove('animate');
+            inputGroup.classList.remove('animate');
+        }, 400);
+    }
+}
+
+
+	 // Показ обычного вопроса
+	 function showRegularQuestion() {
+			 // Сбрасываем финальные стили
+			 overlay.style.opacity = '0';
+			 card.classList.remove('end3');
+			 card.style.opacity = '1';
+			 card.style.transform = 'scale(1)';
+			 inputGroup.style.display = 'flex';
+			 answerInput.focus();
+			 backButton.style.opacity = '0';
+			 backButton.style.transform = 'translateY(20px)';
+			 
+			 // Анимация появления вопроса
+			 questionElement.classList.add('animate');
+			 inputGroup.classList.add('animate');
+			 setTimeout(() => {
+					 questionElement.classList.remove('animate');
+					 inputGroup.classList.remove('animate');
+			 }, 400);
+	 }
+
+	 // Показ финального экрана
+	 function showEndScreen() {
+			 // Настраиваем и показываем оверлей
+			 overlay.style.transition = 'opacity 0.5s ease';
+			 overlay.style.opacity = '1';
+			 overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+			 overlay.style.zIndex = '998';
+			 
+			 // Активируем финальный стиль карточки
+			 card.classList.add('end3');
+			 inputGroup.style.display = 'none';
+			 
+			 // Плавно показываем карточку
+			 setTimeout(() => {
+					 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+					 card.style.opacity = '1';
+					 card.style.transform = 'scale(1)';
+					 
+					 // Показываем кнопку "Назад" с задержкой
+					 setTimeout(() => {
+							 backButton.style.opacity = '1';
+							 backButton.style.transform = 'translateY(0)';
+					 }, 500);
+			 }, 300);
+	 }
+
+	 // Проверка ответа
+	 function checkAnswer() {
+	const question = questions[currentQuestionIndex];
+	if (question.isEnd3) return;
+
+	const userAnswer = normalizeAnswer(answerInput.value.trim().toLowerCase());
+
+	let isCorrect = false;
+
+	if (Array.isArray(question.answer)) {
+		isCorrect = question.answer.some(ans => {
+			if (typeof ans === 'string') {
+				return userAnswer === normalizeAnswer(ans.trim().toLowerCase());
+			}
+			return false;
+		});
+	} else if (typeof question.answer === 'string') {
+		isCorrect = userAnswer === normalizeAnswer(question.answer.trim().toLowerCase());
+	} else {
+		console.warn("Неизвестный формат ответа в question.answer", question.answer);
+	}
+
+	if (isCorrect) {
+		card.classList.add('correct-flash');
+		setTimeout(() => {
+			card.classList.remove('correct-flash');
+			currentQuestionIndex++;
+			if (currentQuestionIndex < questions.length) {
+				showQuestion();
+			}
+		}, 500);
+	} else {
+		answerInput.classList.add('error');
+		setTimeout(() => {
+			answerInput.value = '';
+			answerInput.classList.remove('error');
+		}, 1000);
+	}
+}
+
+
+	 // Обработка неправильного ответа
+	 function handleWrongAnswer() {
+			 answerInput.classList.add('error');
+			 answerInput.value = '';
+			 setTimeout(() => answerInput.classList.remove('error'), 1000);
+	 }
+
+	 // Обработчики событий
+	 startBtn.addEventListener('click', () => {
+	 startScreen.style.display = 'none';
+	 questionScreen.style.display = 'flex'; // Важно: flex вместо block!
+			 resetQuizState();
+			 showQuestion();
+	 });
+
+	 submitBtn.addEventListener('click', function() {
+  checkAnswer();
+});
+	 // Обработчик нажатия Enter в поле ввода
+	 answerInput.addEventListener('keypress', function(e) {
+			 if (e.key === 'Enter') {
+					 checkAnswer();
+			 }
+	 });
+
+	 // Инициализация при загрузке
+	 initQuiz();
+});
+
+
+
+			 document.getElementById('back-button').addEventListener('click', function() {
+				// Помечаем уровень 3 как пройденный
+				localStorage.setItem('level3Completed', 'true');
+
+				// Потом идём в лобби
+				window.location.href = 'lobby.html'; // или куда у тебя настроено
+				});
+
+ </script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html style="backface-visibility: hidden; transform: translateZ(0);">
+<head>
+  <title>Финал</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
+
+    #backgroundVideo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #flyingEnvelope {
+      width: 23%;
+      height: 20%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+      transform-origin: center center;
+      opacity: 1;
+      will-change: transform, opacity;
+      animation: flyRotateScale 4s ease forwards, floating 8s ease-in-out infinite;
+      animation-delay: 1s, 6s;
+
+      clip-path: inset(0 round 12px);
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+
+      filter: drop-shadow(0 0 60px rgba(0, 0, 0, 1));
+    }
+
+    /* Затемняющий overlay поверх всего */
+    #overlayFade {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: black;
+      opacity: 1;
+      pointer-events: none; /* Чтобы не мешал кликам */
+      animation: fadeOutOverlay 9s ease forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeOutOverlay {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    @keyframes flyRotateScale {
+      0% {
+        transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+        opacity: 1;
+      }
+      70% {
+        transform: translate(-50%, -50%) scale(2.5) rotate(600deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(0deg);
+      }
+      30% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(2deg);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(-2deg);
+      }
+			80% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(2deg);
+      }
+			100% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(0deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Затемнение при загрузке -->
+  <div id="overlayFade"></div>
+
+  <img id="flyingEnvelope" src="/images/ticket.jpg" alt="Конверт" />
+
+  <video autoplay muted loop playsinline id="backgroundVideo">
+    <source src="/images/video.mov" type="video/mp4">
+  </video>
+
+</body>
+</html>
